@@ -3,6 +3,15 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema
 import bcrypt from 'bcrypt'
 
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+
+ImageSchema.virtual("thumbnail").get(function () {
+  return this.url.replace("/upload", "/upload/w_200");
+});
+
 const userSchema = new Schema({
   // about me
   username: {
@@ -21,10 +30,7 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  image: {
-    type: String,
-    required: true
-  }, // url
+  images: [ImageSchema],
   university: {
     type: String,
     required: true
@@ -76,6 +82,10 @@ const userSchema = new Schema({
     required: true
   }
 });
+
+
+
+
 
 userSchema.statics.signup = async function(username, password) {
 

@@ -9,3 +9,5 @@ export function LoginSuccess() {
 
   return <div>Login successful!</div>;
 }
+
+export default LoginSuccess;

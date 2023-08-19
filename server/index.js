@@ -10,6 +10,7 @@ import User from "./models/user.js";
 
 import connectDB from "./mongodb/connect.js";
 import userRoutes from './routes/userRoute.js'
+import matchRoutes from './routes/matchRoute.js'
 
 dotenv.config();
 
@@ -88,6 +89,8 @@ passport.deserializeUser((id, done) => {
 });
 
 app.use('/auth', userRoutes)
+
+app.use('/profile', matchRoutes)
 
 app.get("/api", async (req, res) => {
     await console.log('here')

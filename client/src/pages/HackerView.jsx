@@ -1,32 +1,48 @@
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import axios from 'axios'
 
 const ListPage = () => {
-  const items = [
-    { title: "Item 1", description: "Description for Item 1" },
-    { title: "Item 2", description: "Description for Item 2" },
-    { title: "Item 3", description: "Description for Item 3" },
-    // Add more items as needed
-  ];
+  const [matches, setMatches] = useState(null)
+
+  useEffect(() => {
+    const fetchMatches = async () => {
+      const response = await axios.get('http://localhost:8080/profile/matches', {
+        withCredentials: true
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      await console.log(response)
+      if (response && response.data) {
+        setMatches(response.data)
+        console.log(response.data)
+      }
+    }
+
+    fetchMatches()
+  }, [])
 
   return (
+    <> {(matches) ? 
     <Flex direction="column" padding="5">
-      <Heading marginBottom="5">List of Items</Heading>
-      {items.map((item, index) => (
-        <Box
-          key={index}
-          borderRadius="md"
-          borderWidth="1px"
-          padding="5"
-          marginBottom="4"
-          boxShadow="lg"
-        >
-          <Heading size="md">{item.title}</Heading>
-          <Text>{item.description}</Text>
-        </Box>
-      ))}
-    </Flex>
+        <Heading marginBottom="5">List of Matches</Heading>
+        {matches.map((match) => (
+          <Box
+            key={match._id}
+            borderRadius="md"
+            borderWidth="1px"
+            padding="5"
+            marginBottom="4"
+            boxShadow="lg"
+          >
+            <Heading size="md">{match.fullName}</Heading>
+            <Text>{match.bio}</Text>
+          </Box>
+        ))}
+      </Flex>
+      : <div>No matches found</div>
+    } </>
   );
 };
 

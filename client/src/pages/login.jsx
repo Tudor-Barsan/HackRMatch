@@ -5,6 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 const Login = () => {
     const { dispatch } = useAuthContext();
+    const { user } = useAuthContext();
 
     const fetchAuthUser = async () => {
         const response = await axios
@@ -16,7 +17,6 @@ const Login = () => {
         if (response && response.data) {
             localStorage.setItem('user', JSON.stringify(response.data))
             await dispatch({type: 'LOGIN', payload: response.data})
-            await console.log('logged in: ', localStorage.getItem('user'))
         }
     }
 
@@ -42,12 +42,14 @@ const Login = () => {
 
     return (
         <div>
-            <Link rel="stylesheet" to="/css/style.css"/>
             <div className="login">
                 <header>
                     <h1>Login using:</h1>
                 </header>
                 <div className="loginLinkExt"><button onClick={redirectToGoogleSSO}>Google+</button></div>
+                {(user) ? 
+                <Link to='/hacker-view'>Matches</Link>
+                : <></>}
             </div>
         </div>
     )

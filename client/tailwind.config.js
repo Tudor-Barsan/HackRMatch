@@ -4,6 +4,11 @@ module.exports = {
   content: ['./src/**/*.{js,jsx}'],
   theme: {
     extend: {
+      colors: {
+        slate: {
+          '900': '#1f2937', // Your desired slate color
+        },
+      },
       screens: {
         xs: '480px',
       },

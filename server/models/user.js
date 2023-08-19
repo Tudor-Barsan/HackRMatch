@@ -4,44 +4,74 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
   // about me
-    username: String,
-    fullName: String,
-    pronouns: String,
-    bio: String,
-    image: String, // url
-    university: String,
+  username: {
+    type: String,
+    required: true
+  },
+  fullName: {
+    type: String,
+    required: true
+  },
+  pronouns: {
+    type: String,
+    required: true
+  },
+  bio: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String,
+    required: true
+  }, // url
+  university: {
+    type: String,
+    required: true
+  },
 
-    languagesHave: [String],
-    languagesWant: [String],
-    interests: [String],
-    location: Number, // jessica can change this later
+  languagesHave: {
+    type: [String],
+    required: true
+  },
+  languagesWant: {
+    type: [String],
+    required: true
+  },
+  interests: {
+    type: [String],
+    required: true
+  },
+  location: {
+    type: Number,
+    required: true
+  }, // jessica can change this later
 
-    otherUsers: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-      }
-    ],
-    myLikes: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-      }
-    ],
-    likedMe: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-      }
-    ],
-    matches: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-      }
-    ],
-  });
-  
-  const User = mongoose.model('User', userSchema);
-  
-  module.exports = User;
+  otherUsers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  myLikes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  likedMe: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  matches: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+});
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

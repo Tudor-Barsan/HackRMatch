@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 import morgan from 'morgan';
 
 import connectDB from "./mongodb/connect.js";
+import userRoutes from './routes/userRoute.js'
 
 dotenv.config();
 
@@ -19,6 +20,8 @@ app.get("/", async (req, res) => {
     await console.log('here')
     res.send(1);
 });
+
+app.use('/auth', userRoutes)
 
 const startServer = async () => {
 

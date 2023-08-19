@@ -80,7 +80,6 @@ input {
   background-color: #e4e4e4;
   padding: 12px;
   border-radius: 8px;
-  font-family: Inter;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -88,7 +87,6 @@ input {
 }
 
 .chakra-text {
-  font-family: Inter;
   font-style: normal;
   font-weight: 800;
   font-size: 20px;
@@ -100,7 +98,6 @@ input {
 }
 
 .chakra-form__label {
-  font-family: Inter;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;

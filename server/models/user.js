@@ -15,41 +15,18 @@ ImageSchema.virtual("thumbnail").get(function () {
 
 const userSchema = new Schema({
   // about me
-  fullName: { // display name
-    type: String,
-    required: true
-  },
-  pronouns: {
-    type: String,
-    required: true
-  },
-  bio: {
-    type: String,
-    required: true
-  },
-  images: [ImageSchema],
-  university: {
-    type: String,
-    required: true
-  },
+  fullName: String,
+  pronouns: String,
+  bio: String,
+  images: String,
+  university: String,
 
   // matching info
-  mySkills: {
-    type: [String],
-    required: true
-  },
-  wantedSkills: {
-    type: [String],
-    required: true
-  },
-  interests: {
-    type: [String],
-    required: true
-  },
-  location: {
-    type: String,
-    required: true
-  },
+  mySkills: [String],
+  wantedSkills: [String],
+  interests: [String],
+  location: [String],
+  score: Number,
 
   // socials
   publicSocials: Boolean,

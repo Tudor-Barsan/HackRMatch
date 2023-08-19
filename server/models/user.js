@@ -2,6 +2,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema
 import bcrypt from 'bcrypt'
+import ExpressError from '../utils/expressError.js';
 
 const ImageSchema = new Schema({
   url: String,
@@ -14,114 +15,81 @@ ImageSchema.virtual("thumbnail").get(function () {
 
 const userSchema = new Schema({
   // about me
-  googleId: {
+  fullName: { // display name
     type: String,
-    // required: true
+    required: true
   },
-  // fullName: {
-  //   type: String,
-  //   required: true
-  // },
-  // pronouns: {
-  //   type: String,
-  //   required: true
-  // },
-  // bio: {
-  //   type: String,
-  //   required: true
-  // },
-  // images: [ImageSchema],
-  // university: {
-  //   type: String,
-  //   required: true
-  // },
+  pronouns: {
+    type: String,
+    required: true
+  },
+  bio: {
+    type: String,
+    required: true
+  },
+  images: [ImageSchema],
+  university: {
+    type: String,
+    required: true
+  },
 
-  // languagesHave: {
-  //   type: [String],
-  //   required: true
-  // },
-  // languagesWant: {
-  //   type: [String],
-  //   required: true
-  // },
-  // interests: {
-  //   type: [String],
-  //   required: true
-  // },
-  // location: {
-  //   type: Number,
-  //   required: true
-  // }, // daniel can change this later
+  // matching info
+  mySkills: {
+    type: [String],
+    required: true
+  },
+  wantedSkills: {
+    type: [String],
+    required: true
+  },
+  interests: {
+    type: [String],
+    required: true
+  },
+  location: {
+    type: String,
+    required: true
+  },
 
-  // otherUsers: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'User'
-  //   }
-  // ],
-  // myLikes: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'User'
-  //   }
-  // ],
-  // likedMe: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'User'
-  //   }
-  // ],
-  // matches: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'User'
-  //   }
-  // ],
-  // password: {
-  //   type: "String",
-  //   required: true
-  // }
+  // socials
+  publicSocials: Boolean,
+  email: String,
+  instagram: String,
+  discord: String,
+  website: String,
+  resume: String,
+
+  // relationships
+  possibleMatchesCount: Number,
+  possibleMatches: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+  ],
+  myLikesCount: Number,
+  myLikes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  likedMeCount: Number,
+  likedMe: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  matchesCount: Number,
+  matches: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ]
 });
 
-
-
-
-
-userSchema.statics.signup = async function(username, password) {
-
-  const exists = await this.findOne({ username })
-
-  if (exists) {
-    throw Error('Username already in use')
-  }
-
-  const salt = await bcrypt.genSalt(10)
-  const hash = await bcrypt.hash(password, salt)
-
-  const user = await this.create({ username, password: hash })
-
-  return user
-}
-
-userSchema.statics.login = async function(username, password) {
-  if (!email || !password) {
-    throw new Error('fill in fields')
-  }
-
-  const user = await this.findOne({ username })
-
-  if (!user) {
-    throw Error('User not found')
-  }
-
-  const match = await bcrypt.compare(password, user.password)
-
-  if (!match) {
-    throw Error('Incorrect password')
-  }
-
-  return user
-}
 
 const User = mongoose.model('User', userSchema);
 

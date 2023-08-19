@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema
 import bcrypt from 'bcrypt'
-import ExpressError from '../utils/expressError';
+import ExpressError from '../utils/expressError.js';
 
 const ImageSchema = new Schema({
   url: String,
@@ -101,7 +101,7 @@ userSchema.statics.signup = async function(username, password) {
 
   const user = await this.create({ username, password: hash })
 
-  
+
   return user
 }
 

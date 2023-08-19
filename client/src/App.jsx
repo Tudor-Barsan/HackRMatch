@@ -5,6 +5,7 @@ import { CreateProfile, Landing } from "./pages";
 import Login from "./pages/Login";
 import { LoginSuccess } from "./pages/LoginSuccess";
 import HackerView from "./pages/HackerView";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/hacker-view" element={<HackerView />} />
         </Routes>
     </BrowserRouter>
+
   );
 };
 

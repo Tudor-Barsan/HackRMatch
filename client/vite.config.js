@@ -5,7 +5,7 @@ import fs from 'fs/promises';
 export default defineConfig(() => ({
   server: {
     proxy: {
-      '/api': "http://localhost:8080/"  // THIS IS BACKEND'S URL,  THE FRONTEND'S URL IS FROM -> http://localhost:5173
+      '/api': "http://localhost:8080"  // THIS IS BACKEND'S URL,  THE FRONTEND'S URL IS FROM -> http://localhost:5173
     }
   },
   esbuild: {

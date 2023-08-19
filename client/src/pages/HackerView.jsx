@@ -13,10 +13,9 @@ const ListPage = () => {
       .catch((err) => {
         console.log(err)
       })
-      await console.log(response)
+
       if (response && response.data) {
         setMatches(response.data)
-        console.log(response.data)
       }
     }
 

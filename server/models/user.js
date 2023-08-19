@@ -26,6 +26,7 @@ const userSchema = new Schema({
   wantedSkills: [String],
   interests: [String],
   location: [String],
+  score: Number,
 
   // socials
   publicSocials: Boolean,

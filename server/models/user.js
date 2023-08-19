@@ -2,6 +2,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema
 import bcrypt from 'bcrypt'
+import ExpressError from '../utils/expressError';
 
 const ImageSchema = new Schema({
   url: String,
@@ -92,7 +93,7 @@ userSchema.statics.signup = async function(username, password) {
   const exists = await this.findOne({ username })
 
   if (exists) {
-    throw Error('Username already in use')
+    throw new ExpressError('Username already in use')
   }
 
   const salt = await bcrypt.genSalt(10)
@@ -100,12 +101,13 @@ userSchema.statics.signup = async function(username, password) {
 
   const user = await this.create({ username, password: hash })
 
+  
   return user
 }
 
 userSchema.statics.login = async function(username, password) {
   if (!email || !password) {
-    throw new Error('fill in fields')
+    throw new ExpressError('fill in fields')
   }
 
   const user = await this.findOne({ username })

@@ -10,7 +10,7 @@ const Landing = () => {
           alt="HackRMatch Logo"
         ></img>
           <Link to="/create-profile">
-            Sign in with Google
+            Sign in
           </Link>
       </body>
     )

@@ -14,7 +14,7 @@ ImageSchema.virtual("thumbnail").get(function () {
 
 const userSchema = new Schema({
   // about me
-  username: {
+  googleId: {
     type: String,
     // required: true
   },

@@ -16,13 +16,6 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-    methods: "GET,PUT,PATCH,POST,DELETE",
-  })
-);
-
 app.use(session({
     secret: 'cookiekey',
     resave: false,
@@ -32,9 +25,30 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+    methods: "GET,PUT,PATCH,POST,DELETE",
+  })
+);
+
+const startServer = async () => {
+
+    try {
+        await connectDB(process.env.MONGODB_URL);
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+    app.listen(8080, () => console.log("Server is running on port 8080"));
+    };
+
+startServer();
+
 app.use(express.static('public'));
 app.use(morgan('dev'));
-
+app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     res.append('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
     next();
@@ -52,8 +66,6 @@ passport.use(
             } else {
                 new User({
                     googleId: profile.id,
-                    username: profile.displayName,
-                    thumbnail: profile._json.picture,
                     moreInfo: profile.email,
                 }).save().then((newUser) => {
                     done(null, newUser);
@@ -69,6 +81,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
+    console.log('deserializing')
     User.findById(id).then((user) => {
         done(null, user);
     });
@@ -79,18 +92,3 @@ app.use('/auth', userRoutes)
 app.get("/api", async (req, res) => {
     await console.log('here')
 });
-
-
-const startServer = async () => {
-
-    try {
-        await connectDB(process.env.MONGODB_URL);
-    }
-    catch (err) {
-        console.log(err);
-    }
-
-    app.listen(8080, () => console.log("Server is running on port 8080"));
-    };
-
-startServer();

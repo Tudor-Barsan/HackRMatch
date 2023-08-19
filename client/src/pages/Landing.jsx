@@ -15,7 +15,9 @@ const Landing = () => {
       .catch((err) => {
           console.log(err);
       });
+      console.log(response)
     if (response) {
+        console.log('should return response')
         console.log(response)
         localStorage.removeItem('user')
         dispatch({type: 'LOGOUT'})

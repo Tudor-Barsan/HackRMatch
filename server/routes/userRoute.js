@@ -18,9 +18,13 @@ router.get('/login', (req, res) => {
 
 // logout
 router.get('/logout', function(req, res, next) {
+    console.log("logout called")
     req.logout(function(err) {
+        console.log(err, "nskfjgk")
         if (err) { return next(err); }
-        res.redirect('/api');
+        return res.json({
+            message: "OK"
+        })
       });
 });
 

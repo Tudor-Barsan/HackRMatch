@@ -1,6 +1,6 @@
 // models / userModel.js
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+import mongoose from 'mongoose'
+import { Schema } from 'mongoose'
 
 const userSchema = new Schema({
   // about me
@@ -72,6 +72,4 @@ const userSchema = new Schema({
   ],
 });
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+export const User = mongoose.model("User", userSchema);

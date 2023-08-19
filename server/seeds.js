@@ -48,7 +48,7 @@ const generateFakeUser = () => {
     resume: faker.image.avatar(),
 
     possibleMatchesCount: 0,
-    otherUsers: [],
+    possibleMatches: [],
     myLikesCount: 0,
     myLikes: [],
     likedMeCount: 0,
@@ -98,4 +98,4 @@ const seedDB = async () => {
   }
 };
 
-seedDB();
+// seedDB();

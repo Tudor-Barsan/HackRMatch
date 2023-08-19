@@ -2,13 +2,10 @@ import React from "react";
 import { BrowserRouter, Link, Routes, Route} from "react-router-dom";
 
 import { CreateProfile, Landing } from "./pages";
-import { useAuthContext } from './hooks/useAuthContext';
 import Login from "./pages/Login";
 import { LoginSuccess } from "./pages/LoginSuccess";
 
 const App = () => {
-  const { user } = useAuthContext()
-
   return (
     <BrowserRouter>
         <Routes>

@@ -6,7 +6,8 @@ const successLoginURL = "http://localhost:5173/login/success"
 const errorLoginURL = "http://localhost:5173/login/error"
 
 router.get("/user", (req, res) => {
-  res.json(req.user);
+    console.log(req.user);
+    res.json(req.user);
 });
 
 // login

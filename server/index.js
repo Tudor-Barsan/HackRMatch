@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: "http://localhost:5173/",
+    origin: "http://localhost:5173",
     credentials: true,
     methods: "GET,PUT,PATCH,POST,DELETE",
   })
@@ -42,8 +42,8 @@ app.use((req, res, next) => {
 
 passport.use(
     new GoogleStrategy({
-        clientID: keys.clientID,
-        clientSecret: keys.clientSecret,
+        clientID: process.env.clientID,
+        clientSecret: process.env.clientSecret,
         callbackURL: 'http://localhost:8080/auth/google/callback',
     }, async (accessToken, refreshToken, profile, done) => {
         await User.findOne({googleId: profile.id}).then((currentUser) => {
@@ -78,7 +78,6 @@ app.use('/auth', userRoutes)
 
 app.get("/api", async (req, res) => {
     await console.log('here')
-    res.send(1);
 });
 
 

@@ -21,7 +21,7 @@ const Landing = () => {
   }
 
     return (
-      <body>
+      <>
         <img
           className="w-1/2 max-w-sm mx-auto"
           src="../HackRMatchLogo.png"
@@ -32,7 +32,8 @@ const Landing = () => {
           </Link>
           <Link to="/auth/login">Login</Link>
           <button id="logout-btn" onClick={logOutUser}>Logout</button>
-      </body>
+          {user && <div>{user._id}</div>}
+        </>
     )
 };
 

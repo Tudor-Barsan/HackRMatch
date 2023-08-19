@@ -30,13 +30,13 @@ const Login = () => {
         );
     
         if (newWindow) {
-            
+            timer = setInterval(() => {
                 if (newWindow.closed) {
                   console.log("window closed");
                   fetchAuthUser();
                   if (timer) clearInterval(timer);
                 }
-
+            }, 500);
         };
     }
 

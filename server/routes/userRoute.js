@@ -18,8 +18,10 @@ router.get('/login', (req, res) => {
 
 // logout
 router.get('/logout', function(req, res, next) {
-  req.logout();
-  res.redirect('/api');
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/api');
+      });
 });
 
 router.get('/google', passport.authenticate('google', {

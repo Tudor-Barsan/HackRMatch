@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
-import { User } from "./models/user.js";
+// import { User } from "./models/user.js";
+import User from "./models/user.js";
 import * as dotenv from "dotenv";
+import faker from "faker";
 dotenv.config();
 
 mongoose.connect(process.env.MONGODB_URL, {
@@ -14,69 +16,77 @@ db.once("open", () => {
   console.log("database connected");
 });
 
+const availableLanguages = ['JavaScript', 'Python', 'Java', 'C#', 'C++', 'Ruby', 'Swift', 'Kotlin', 
+'PHP', 'TypeScript', 'Go', 'Rust', 'Dart', 'Scala', 'Haskell', 'Lua', 'Perl', 'Objective-C', 'R', 'SQL'];
+const numLanguages = 20;
+const availableUniversities = ['University of Waterloo', 'University of Toronto', 
+'McMaster University', 'Western University', 'Toronto Metropolitan University', 'Queens University'];
+const availableInterests = ['Artificial Intelligence (AI)', 'Virtual Reality (VR)', 'Augmented Reality (AR)', 
+'Machine Learning', 'Data Science', 'Web Development', 'Mobile App Development', 'Blockchain', 
+'Internet of Things (IoT)', 'Cybersecurity', 'Game Development', 'Environmental Sustainability', 'Social Impact', 
+'Healthcare Innovation', 'Smart Cities', 'Robotics', '3D Printing', 'Bioinformatics', 'Space Exploration', 'Ethical Hacking'];
+const numInterests = 20;
+const numFakeUsers = 20;
 
-const users = [
-  {
-    username: "user1",
-    fullName: "User One",
-    pronouns: "he/him",
-    bio: "Student at University One",
-    image: "https://example.com/user1.jpg",
-    university: "University One",
-    languagesHave: ["English"],
-    languagesWant: ["Spanish"],
-    interests: ["Reading", "Music"],
-    location: 12345,
-    otherUsers: [],
-    myLikes: [],
-    likedMe: [],
-    matches: [],
-  },
-  {
-    username: "user2",
-    fullName: "User Two",
-    pronouns: "she/her",
-    bio: "Teacher at University Two",
-    image: "https://example.com/user2.jpg",
-    university: "University Two",
-    languagesHave: ["English", "French"],
-    languagesWant: ["Italian"],
-    interests: ["Teaching", "Traveling"],
-    location: 67890,
-    otherUsers: [],
-    myLikes: [],
-    likedMe: [],
-    matches: [],
-  },
-  // More users with variations
-  {
-    username: "user3",
-    fullName: "User Three",
-    pronouns: "they/them",
-    bio: "Engineer at Tech Three",
-    image: "https://example.com/user3.jpg",
-    university: "University Three",
-    languagesHave: ["German"],
-    languagesWant: ["English"],
-    interests: ["Engineering", "Dancing"],
-    location: 23456,
-    otherUsers: [],
-    myLikes: [],
-    likedMe: [],
-    matches: [],
-  },
-  // Repeat for users 4 through 10
-];
+const generateFakeUser = () => {
+  const user = new User({
+    username: faker.internet.userName(),
+    fullName: faker.name.findName(),
+    pronouns: faker.random.arrayElement(['he/him', 'she/her', 'they/them']),
+    bio: faker.lorem.sentence(),
+    image: faker.image.avatar(),
+    university: faker.random.arrayElement(availableUniversities),
+    languagesHave: faker.random.arrayElements(availableLanguages, { min: 1, max: numLanguages}),
+    languagesWant: faker.random.arrayElements(availableLanguages, { min: 1, max: numLanguages}),
+    interests: faker.random.arrayElements(availableInterests, {min: 1, max: numInterests}),
+    location: faker.datatype.number(100000),
 
+    possibleMatchesCount: 0,
+    otherUsers: [],
+    myLikesCount: 0,
+    myLikes: [],
+    likedMeCount: 0,
+    likedMe: [],
+    matchesCount: 0,
+    matches: []
+  });
 
-// const sample = (array) => array[Math.floor(Math.random() * array.length)];
+  return user;
+};
+
+const populateRelationships = (users) => {
+  for (let user of users) {
+    const remainingUsers = users.filter(u => u !== user);
+
+    const likedByCount = faker.datatype.number({ min: 0, max: numFakeUsers - 1 });
+    user.likedMe = {
+      count: likedByCount,
+      users: faker.random.arrayElements(remainingUsers, likedByCount).map(u => u._id)
+    };
+
+    const likesCount = faker.datatype.number({ min: 0, max: numFakeUsers - 1 });
+    user.myLikes = faker.random.arrayElements(remainingUsers, likesCount).map(u => u._id);
+
+    user.matches = user.myLikes.filter(likedUserId =>
+      user.likedMe.includes(likedUserId)
+    )
+
+    user.otherUsers = remainingUsers.map(u => u._id);
+  }
+};
+
+const fakeUsers = Array.from({ length: numFakeUsers }, generateFakeUser);
+
+populateRelationships(fakeUsers);
 
 const seedDB = async () => {
-    await User.deleteMany({});
-    for (let i = 0; i < users.length; i++) {
-        const user = new User(users[i]);
-        await user.save();
-    }
+  await User.deleteMany({});
+  try {
+      await User.insertMany(fakeUsers);
+      console.log('Fake users inserted successfully.');
+  } catch (error) {
+      console.error('Error inserting fake users:', error);
+  }
 };
 
 seedDB();

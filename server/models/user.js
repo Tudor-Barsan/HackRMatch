@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema
 import bcrypt from 'bcrypt'
-import ExpressError from '../utils/expressError';
+import ExpressError from '../utils/expressError.js';
 
 const ImageSchema = new Schema({
   url: String,
@@ -15,11 +15,7 @@ ImageSchema.virtual("thumbnail").get(function () {
 
 const userSchema = new Schema({
   // about me
-  username: {
-    type: String,
-    required: true
-  },
-  fullName: {
+  fullName: { // display name
     type: String,
     required: true
   },
@@ -37,6 +33,7 @@ const userSchema = new Schema({
     required: true
   },
 
+  // matching info
   languagesHave: {
     type: [String],
     required: true
@@ -50,80 +47,49 @@ const userSchema = new Schema({
     required: true
   },
   location: {
-    type: Number,
+    type: String,
     required: true
-  }, // daniel can change this later
+  }, 
 
+  // socials
+  publicSocials: Boolean,
+  email: String,
+  instagram: String,
+  discord: String,
+  website: String,
+  resume: ImageSchema,
+
+  // relationships
+  possibleMatchesCount: Number,
   otherUsers: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User'
-    }
+    },
   ],
+  myLikesCount: Number,
   myLikes: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User'
     }
   ],
+  likedMeCount: Number,
   likedMe: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User'
     }
   ],
+  matchesCount: Number,
   matches: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User'
     }
-  ],
-  password: {
-    type: "String",
-    required: true
-  }
+  ]
 });
 
-
-
-
-
-userSchema.statics.signup = async function(username, password) {
-
-  const exists = await this.findOne({ username })
-
-  if (exists) {
-    throw new ExpressError('Username already in use')
-  }
-
-  const salt = await bcrypt.genSalt(10)
-  const hash = await bcrypt.hash(password, salt)
-
-  const user = await this.create({ username, password: hash })
-
-  
-  return user
-}
-
-userSchema.statics.login = async function(username, password) {
-  if (!email || !password) {
-    throw new ExpressError('fill in fields')
-  }
-
-  const user = await this.findOne({ username })
-
-  if (!user) {
-    throw Error('User not found')
-  }
-
-  const match = await bcrypt.compare(password, user.password)
-
-  if (!match) {
-    throw Error('Incorrect password')
-  }
-
-  return user
-}
 
 const User = mongoose.model('User', userSchema);
 

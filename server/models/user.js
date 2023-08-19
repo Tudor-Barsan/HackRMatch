@@ -34,11 +34,11 @@ const userSchema = new Schema({
   },
 
   // matching info
-  languagesHave: {
+  mySkills: {
     type: [String],
     required: true
   },
-  languagesWant: {
+  wantedSkills: {
     type: [String],
     required: true
   },
@@ -49,7 +49,7 @@ const userSchema = new Schema({
   location: {
     type: String,
     required: true
-  }, 
+  },
 
   // socials
   publicSocials: Boolean,
@@ -57,11 +57,11 @@ const userSchema = new Schema({
   instagram: String,
   discord: String,
   website: String,
-  resume: ImageSchema,
+  resume: String,
 
   // relationships
   possibleMatchesCount: Number,
-  otherUsers: [
+  possibleMatches: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User'

@@ -16,9 +16,9 @@ db.once("open", () => {
   console.log("database connected");
 });
 
-const availableLanguages = ['JavaScript', 'Python', 'Java', 'C#', 'C++', 'Ruby', 'Swift', 'Kotlin', 
-'PHP', 'TypeScript', 'Go', 'Rust', 'Dart', 'Scala', 'Haskell', 'Lua', 'Perl', 'Objective-C', 'R', 'SQL'];
-const numLanguages = 20;
+const availableSkills = ['Front-end', 'Back-end', 'Middleware', 'Hardware', 'Project Management', 
+  'APIs', 'Data Analysis', 'UX', 'Design', 'Pitching'];
+const numSkills = 10;
 const availableUniversities = ['University of Waterloo', 'University of Toronto', 
 'McMaster University', 'Western University', 'Toronto Metropolitan University', 'Queens University'];
 const availableInterests = ['Artificial Intelligence (AI)', 'Virtual Reality (VR)', 'Augmented Reality (AR)', 
@@ -30,16 +30,22 @@ const numFakeUsers = 20;
 
 const generateFakeUser = () => {
   const user = new User({
-    username: faker.internet.userName(),
     fullName: faker.name.findName(),
     pronouns: faker.random.arrayElement(['he/him', 'she/her', 'they/them']),
     bio: faker.lorem.sentence(),
     image: faker.image.avatar(),
     university: faker.random.arrayElement(availableUniversities),
-    languagesHave: faker.random.arrayElements(availableLanguages, { min: 1, max: numLanguages}),
-    languagesWant: faker.random.arrayElements(availableLanguages, { min: 1, max: numLanguages}),
+    mySkills: faker.random.arrayElements(availableSkills, { min: 1, max: numSkills}),
+    wantedSkills: faker.random.arrayElements(availableSkills, { min: 1, max: numSkills}),
     interests: faker.random.arrayElements(availableInterests, {min: 1, max: numInterests}),
     location: faker.datatype.number(100000),
+
+    publicSocials: faker.random.arrayElement([true, false]),
+    email: faker.internet.email(),
+    instagram: faker.internet.userName(),
+    discord: faker.internet.userName(),
+    website: faker.internet.url(),
+    resume: faker.image.avatar(),
 
     possibleMatchesCount: 0,
     otherUsers: [],
@@ -58,20 +64,23 @@ const populateRelationships = (users) => {
   for (let user of users) {
     const remainingUsers = users.filter(u => u !== user);
 
-    const likedByCount = faker.datatype.number({ min: 0, max: numFakeUsers - 1 });
-    user.likedMe = {
-      count: likedByCount,
-      users: faker.random.arrayElements(remainingUsers, likedByCount).map(u => u._id)
-    };
+    user.likedByCount = faker.datatype.number({ min: 0, max: numFakeUsers - 1 });
+    user.likedMe = faker.random.arrayElements(remainingUsers, user.likedByCount).map(u => u._id);
 
-    const likesCount = faker.datatype.number({ min: 0, max: numFakeUsers - 1 });
-    user.myLikes = faker.random.arrayElements(remainingUsers, likesCount).map(u => u._id);
+    user.myLikesCount = faker.datatype.number({ min: 0, max: numFakeUsers - 1 });
+    user.myLikes = faker.random.arrayElements(remainingUsers, user.myLikesCount).map(u => u._id);
 
-    user.matches = user.myLikes.filter(likedUserId =>
-      user.likedMe.includes(likedUserId)
-    )
+    user.matches = []
+    for (let likedUserId of user.myLikes) {
+      if (user.likedMe.includes(likedUserId)) {
+        user.matches.push(likedUserId);
+        remainingUsers.splice(remainingUsers.findIndex(u => u._id === likedUserId), 1);
+      }
+    }
+    user.matchesCount = user.matches.length;
 
-    user.otherUsers = remainingUsers.map(u => u._id);
+    user.possibleMatches = remainingUsers
+    user.possibleMatchesCount = remainingUsers.length
   }
 };
 

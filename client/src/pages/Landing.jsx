@@ -33,7 +33,6 @@ const Landing = () => {
         ></img>
           <Link to="/auth/login">Login</Link>
           {user && <button onClick={logOutUser}>Logout</button>}
-          {user ? <div>{user._id}</div> : <div>No one </div>}
         </>
     )
 };

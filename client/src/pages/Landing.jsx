@@ -25,7 +25,7 @@ const Landing = () => {
   }
 
     return (
-      <>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <img
           className="w-1/2 max-w-sm mx-auto"
           src="../HackRMatchLogo.png"
@@ -33,7 +33,7 @@ const Landing = () => {
         ></img>
           <Link to="/auth/login">Login</Link>
           {user && <button onClick={logOutUser}>Logout</button>}
-        </>
+      </div>
     )
 };
 

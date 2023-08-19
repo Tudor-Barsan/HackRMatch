@@ -1,5 +1,7 @@
 import express from "express";
+import cors from "cors";
 import * as dotenv from "dotenv";
+import morgan from 'morgan';
 
 import connectDB from "./mongodb/connect.js";
 
@@ -8,8 +10,14 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+app.use(cors());
+
+app.use(express.static('public'));
+app.use(morgan('dev'));
+
+app.get("/", async (req, res) => {
+    await console.log('here')
+    res.send(1);
 });
 
 const startServer = async () => {

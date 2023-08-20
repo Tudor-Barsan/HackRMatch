@@ -22,7 +22,13 @@ const Navbar = () => {
     return (
         <div>
             <nav>
-                <Link id="homeBtn" to="/" className="nav-button">Home</Link>
+                <a href="/" className="logo-button">
+                    <img
+                        width="50%"
+                        src="../HackRMatchSmallLogo.png"
+                        alt="HackRMatch Small Logo"
+                    />
+                </a>
                 <ul id="navOptions">
                     <li><Link to="/hacker-view" className="nav-button">Matches</Link></li>
                     <li><button id="logoutBtn" className="nav-button" onClick={logOutUser}>Logout</button></li>

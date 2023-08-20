@@ -171,6 +171,17 @@ nav {
   background-color: #C4B3D8 !important;
 }
 
+.logo-button {
+  background-color: transparent;
+  border-color: transparent;
+  text-align: left;
+  width: 200px;
+}
+
+.logo-button:hover {
+  background-color: transparent;
+}
+
 #homeBtn {
   width: fit-content;
   font-size: 1.4em;
@@ -218,8 +229,5 @@ nav {
     border-color: #1a1a1a;
     width: 35%;
     height: 20%;
-  }
-  img{
-    width: 80%;
   }
 }

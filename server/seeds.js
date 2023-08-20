@@ -67,10 +67,10 @@ const generateFakeUser = () => {
 
 const populateRelationships = (users) => {
   for (let user of users) {
-    const remainingUsers = users.filter(u => u !== user);
+    var remainingUsers = users.filter(u => u !== user);
 
-    user.likedByCount = faker.datatype.number({ min: 0, max: numFakeUsers - 1 });
-    user.likedMe = faker.random.arrayElements(remainingUsers, user.likedByCount).map(u => u._id);
+    user.likedMeCount = faker.datatype.number({ min: 0, max: numFakeUsers - 1 });
+    user.likedMe = faker.random.arrayElements(remainingUsers, user.likedMeCount).map(u => u._id);
 
     user.myLikesCount = faker.datatype.number({ min: 0, max: numFakeUsers - 1 });
     user.myLikes = faker.random.arrayElements(remainingUsers, user.myLikesCount).map(u => u._id);
@@ -80,12 +80,16 @@ const populateRelationships = (users) => {
       if (user.likedMe.includes(likedUserId)) {
         user.matches.push(likedUserId);
         remainingUsers.splice(remainingUsers.findIndex(u => u._id === likedUserId), 1);
+        user.likedMe.splice(remainingUsers.findIndex(u => u._id === likedUserId), 1);
+        user.likedMeCount--;
+        user.myLikes.splice(remainingUsers.findIndex(u => u._id === likedUserId), 1);
+        user.myLikesCount--;
       }
     }
     user.matchesCount = user.matches.length;
 
-    user.possibleMatches = remainingUsers
-    user.possibleMatchesCount = remainingUsers.length
+    user.possibleMatches = remainingUsers.map((user) => user._id);
+    user.possibleMatchesCount = remainingUsers.length;
   }
 };
 
@@ -112,4 +116,4 @@ const seedDB = async () => {
   }
 };
 
-//seedDB();
+// seedDB();

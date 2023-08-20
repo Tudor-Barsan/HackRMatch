@@ -5,5 +5,5 @@ export const findMatches = async (req, res) => {
     const { possibleMatches } = await User.findById(userId).populate('possibleMatches'); 
 
     await res.status(200).json(possibleMatches);
-    
+
 }

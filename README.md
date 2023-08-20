@@ -1,6 +1,7 @@
 
 # HackRMatch 🚀
-<img src="https://cdn.discordapp.com/attachments/1109314151131648010/1142704677192990800/HackRMatchSmallLogo.png" alt="drawing" width="500" style="margin:auto"/>
+<p align="center"><img src="https://cdn.discordapp.com/attachments/1109314151131648010/1142704677192990800/HackRMatchSmallLogo.png" alt="drawing" width="500" style="margin:auto"/></p>
+
 ## About
 HackRMatch is your ultimate hackathon teammate finder. Powered by intelligent algorithms, it expertly matches users based on skills, interests, and location. Say goodbye to the endless search for the perfect team, and embrace innovation with HackRMatch!
 

@@ -8,7 +8,7 @@ HackRMatch is your ultimate hackathon teammate finder. Powered by intelligent al
 
 ## Features
 - **Intelligent Matching:** Mathematically derived algorithms for precise team-building.
-- **User Authentication:** Secure login and registration using **Passport.js** for personalized experience.
+- **User Authentication:** Secure login and registration using **Passport.js** combined with React Hooks, Context and Reducer for personalized experience.
 - **Profile Creation:** Customizable profiles to showcase skills, interests, and hackathon history.
 - **Image Hosting:** Add profile pictures and project images for a visual portfolio.
 - **Responsive Design:** A seamless experience on desktop and mobile.

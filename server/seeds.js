@@ -16,6 +16,10 @@ db.once("open", () => {
   console.log("database connected");
 });
 
+const avatarUrls = [
+  'xsgames.co/randomusers/avatar.php?g=male',
+  'xsgames.co/randomusers/avatar.php?g=female'
+]
 const availableSkills = ['Front-end', 'Back-end', 'Middleware', 'Hardware', 'Project Management', 
   'APIs', 'Data Analysis', 'UX', 'Design', 'Pitching'];
 const numSkills = 10;
@@ -33,7 +37,7 @@ const generateFakeUser = () => {
     fullName: faker.name.findName(),
     pronouns: faker.random.arrayElement(['he/him', 'she/her', 'they/them']),
     bio: faker.lorem.sentence(),
-    image: faker.image.avatar(),
+    image: faker.random.arrayElement(avatarUrls),
     university: faker.random.arrayElement(availableUniversities),
     mySkills: faker.random.arrayElements(availableSkills, { min: 1, max: numSkills}),
     wantedSkills: faker.random.arrayElements(availableSkills, { min: 1, max: numSkills}),
@@ -98,4 +102,4 @@ const seedDB = async () => {
   }
 };
 
-// seedDB();
+seedDB();

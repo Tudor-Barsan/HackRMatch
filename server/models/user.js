@@ -18,14 +18,14 @@ const userSchema = new Schema({
   fullName: String,
   pronouns: String,
   bio: String,
-  images: String,
+  image: String,
   university: String,
 
   // matching info
   mySkills: [String],
   wantedSkills: [String],
   interests: [String],
-  location: [String],
+  location: String,
   score: Number,
 
   // socials

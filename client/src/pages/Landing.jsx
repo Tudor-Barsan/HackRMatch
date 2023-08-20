@@ -60,9 +60,9 @@ const Landing = () => {
           src="../HackRMatchLogo.png"
           alt="HackRMatch Logo"
         ></img>
-          {(!user) && <div className="loginLinkExt"><button onClick={redirectToGoogleSSO}>Google</button></div>}
-          {(user) ? <Link to='/hacker-view'>Matches</Link> : <></>}
-          {user && <button onClick={logOutUser}>Logout</button>}
+          {(!user) && <div><button className="homeBtn" onClick={redirectToGoogleSSO}>Sign in with Google</button></div>}
+          {(user) ? <Link className="homeBtn" to='/create-profile'>Create Profile</Link> : <></>}
+          {user && <button className="homeBtn" onClick={logOutUser}>Logout</button>}
       </div>
     )
 };

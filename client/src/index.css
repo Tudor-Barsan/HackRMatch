@@ -60,7 +60,8 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+
+button:hover, #logoutBtn:hover, #googleBtn:hover {
   background-color: #834ea1;
 }
 
@@ -147,6 +148,55 @@ span {
   flex-wrap: wrap;
 }
 
+.homeBtn {
+  font-size: 1.5em;
+  width: fit-content;
+  background-color: #653780;
+  margin-bottom: 0.8em;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #b2c6fb;
+  padding: 0.5em;
+}
+
+#homeBtn {
+  width: fit-content;
+  font-size: 1.4em;
+  margin: 1em;
+}
+
+#navOptions {
+  display: flex;
+  gap: 0.5em;
+  font-size: 1.4em;
+}
+
+#navOptions > li {
+  list-style: none;
+  margin: auto;
+  border-radius: 3px;
+}
+
+#logoutBtn {
+  background-color: #653780;
+  border-color: #1a1a1a;
+  width: fit-content;
+  margin-right: 1em;
+}
+
+#errorTitle {
+  margin: 0.3em;
+  color: #fff;
+}
+
+#errorMssg {
+  font-size: 1.8em;
+  margin: 1em;
+  color: #fff;
+}
 
 @media (prefers-color-scheme: light) {
   :root {

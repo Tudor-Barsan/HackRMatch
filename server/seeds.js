@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
-// import { User } from "./models/user.js";
 import User from "./models/user.js";
 import * as dotenv from "dotenv";
 import faker from "faker";
+import { createAvatar } from '@dicebear/core';
+import { bottts } from '@dicebear/collection';
 dotenv.config();
 
 mongoose.connect(process.env.MONGODB_URL, {
@@ -16,6 +17,9 @@ db.once("open", () => {
   console.log("database connected");
 });
 
+const avatarNames = ['Oreo', 'Ginger', 'Garfield', 'Boots', 'Buster', 'Charlie', 'Misty', 'Miss kitty', 
+'Lola', 'Coco', 'Jasper', 'Missy', 'Pumpkin', 'Peanut', 'Lucy', 'Mittens', 'Nala', 'Simon', 'Shadow', 'Tiger'];
+const numAvatars = 20;
 const availableSkills = ['Front-end', 'Back-end', 'Middleware', 'Hardware', 'Project Management', 
   'APIs', 'Data Analysis', 'UX', 'Design', 'Pitching'];
 const numSkills = 10;
@@ -25,6 +29,7 @@ const availableInterests = ['Artificial Intelligence (AI)', 'Virtual Reality (VR
 'Machine Learning', 'Data Science', 'Web Development', 'Mobile App Development', 'Blockchain', 
 'Internet of Things (IoT)', 'Cybersecurity', 'Game Development', 'Environmental Sustainability', 'Social Impact', 
 'Healthcare Innovation', 'Smart Cities', 'Robotics', '3D Printing', 'Bioinformatics', 'Space Exploration', 'Ethical Hacking'];
+const availableCities = ['Waterloo', 'Toronto', 'Hamilton', 'London', 'Mississauga', 'Burlington', 'Oakville', 'Markham', 'Ottawa', 'Windsor', 'Kitchener', 'Cambridge', 'Guelph', 'St. Catharines', 'Niagara Falls', 'Barrie', 'Richmond Hill', 'Vaughan'];
 const numInterests = 20;
 const numFakeUsers = 20;
 
@@ -33,12 +38,12 @@ const generateFakeUser = () => {
     fullName: faker.name.findName(),
     pronouns: faker.random.arrayElement(['he/him', 'she/her', 'they/them']),
     bio: faker.lorem.sentence(),
-    image: faker.image.avatar(),
+    image: ``,
     university: faker.random.arrayElement(availableUniversities),
     mySkills: faker.random.arrayElements(availableSkills, { min: 1, max: numSkills}),
     wantedSkills: faker.random.arrayElements(availableSkills, { min: 1, max: numSkills}),
     interests: faker.random.arrayElements(availableInterests, {min: 1, max: numInterests}),
-    location: faker.datatype.number(100000),
+    location: faker.random.arrayElement(availableCities),
 
     publicSocials: faker.random.arrayElement([true, false]),
     email: faker.internet.email(),
@@ -84,9 +89,18 @@ const populateRelationships = (users) => {
   }
 };
 
+const populateAvatars = (users) => {
+  for (let i = 0; i < numAvatars; i++) {
+    users[i].image = `https://api.dicebear.com/6.x/bottts/svg?seed=${avatarNames[i]}`;
+  }
+}
+
 const fakeUsers = Array.from({ length: numFakeUsers }, generateFakeUser);
 
 populateRelationships(fakeUsers);
+populateAvatars(fakeUsers);
+
+console.log(fakeUsers);
 
 const seedDB = async () => {
   await User.deleteMany({});
@@ -98,4 +112,4 @@ const seedDB = async () => {
   }
 };
 
-// seedDB();
+//seedDB();

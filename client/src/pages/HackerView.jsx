@@ -5,6 +5,7 @@ import { useAuthContext } from '../hooks/useAuthContext.js'
 import { Navigate } from "react-router";
 
 import UserCard from "../components/UserCard.jsx";
+import Navbar from "../components/Navbar.jsx";
 
 
 const ListPage = () => {
@@ -32,6 +33,7 @@ const ListPage = () => {
 
   return (
     <> 
+    <Navbar />
       {(user) ? 
       (matches) ? 
       <Flex direction="column" padding="5" background="linear-gradient(270deg, #0e0013 0%, #3a122e 74%)">

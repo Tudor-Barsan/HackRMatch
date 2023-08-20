@@ -63,7 +63,7 @@ const ListPage = () => {
                 image={match.image}
                 wantedSkills={match.wantedSkills}
                 interests={match.interests}
-                location={match.location[0]}
+                location={match.location}
                 website={match.website}
               />
             </Box>

@@ -24,12 +24,12 @@ import {
 
 import { useAuthContext } from "../hooks/useAuthContext";
 
-
 const isWebView = false;
 
 const CreateProfile = () => {
   const { user } = useAuthContext();
 
+  const [checkedValues, setCheckedValues] = useState([]);
   const [name, setName] = useState("");
   const [pronouns, setPronouns] = useState("");
   const [university, setUniversity] = useState("");
@@ -135,6 +135,7 @@ const CreateProfile = () => {
     };
   
     const getSkillsSection = () => {
+      let count = 0;
       return (
         <Flex flexDir="column" gap="24px">
           <FormControl
@@ -146,8 +147,8 @@ const CreateProfile = () => {
             </FormLabel>
             <CheckboxGroup>
               <Stack gap="25px" spacing={[3, 5]} direction={'row'}>
-                {availableSkills.map(skill => (
-                  <Checkbox value={skill}>{skill}</Checkbox>
+                {availableSkills.map((skill, index) => (
+                  <Checkbox id={"my" + index} key={index} value={skill}>{skill}</Checkbox>
                 ))
                 }
               </Stack>
@@ -163,8 +164,8 @@ const CreateProfile = () => {
             </FormLabel>
             <CheckboxGroup>
               <Stack gap="25px" spacing={[3, 5]} direction={'row'}>
-                {availableSkills.map(skill => (
-                  <Checkbox value={skill}>{skill}</Checkbox>
+                {availableSkills.map((skill, index) => (
+                  <Checkbox id={"want" + index} key={index} value={skill}>{skill}</Checkbox>
                 ))
                 }
               </Stack>
@@ -180,8 +181,8 @@ const CreateProfile = () => {
             </FormLabel>
             <CheckboxGroup>
               <Stack gap="25px" spacing={[3, 5]} direction={'row'}>
-                {availableInterests.map(skill => (
-                  <Checkbox value={skill}>{skill}</Checkbox>
+                {availableInterests.map((skill, index) => (
+                  <Checkbox id={"interest" + index} key={index} value={skill}>{skill}</Checkbox>
                 ))
                 }
               </Stack>

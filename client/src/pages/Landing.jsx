@@ -61,7 +61,7 @@ const Landing = () => {
           alt="HackRMatch Logo"
         ></img>
           {(!user) && <div className="loginLinkExt"><button onClick={redirectToGoogleSSO}>Google</button></div>}
-          {(user) ? <Link to='/hacker-view'>Matches</Link> : <></>}
+          {(user) ? <Link to='/create-profile'>Create Profile</Link> : <></>}
           {user && <button onClick={logOutUser}>Logout</button>}
       </div>
     )

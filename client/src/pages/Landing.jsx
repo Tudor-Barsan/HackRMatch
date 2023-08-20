@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
+import { Button } from "@chakra-ui/react";
+import { FcGoogle } from "react-icons/fc";
 
 const Landing = () => {
   const {user} = useAuthContext()
@@ -60,7 +62,7 @@ const Landing = () => {
           src="../HackRMatchLogo.png"
           alt="HackRMatch Logo"
         ></img>
-          {(!user) && <div><button className="homeBtn" onClick={redirectToGoogleSSO}>Sign in with Google</button></div>}
+          {(!user) && <div><Button className="homeBtn" onClick={redirectToGoogleSSO}><FcGoogle style={{ marginRight: '10px' }} />Sign in with Google</Button></div>}
           {(user) ? <Link className="homeBtn" to='/create-profile'>Create Profile</Link> : <></>}
           {user && <button className="homeBtn" onClick={logOutUser}>Logout</button>}
       </div>

@@ -167,6 +167,9 @@ nav {
   font-weight: 600;
   background-color: #D1C8E1 !important;
 }
+.nav-button:hover {
+  background-color: #C4B3D8 !important;
+}
 
 #homeBtn {
   width: fit-content;

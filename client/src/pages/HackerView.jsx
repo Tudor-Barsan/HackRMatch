@@ -65,6 +65,9 @@ const ListPage = () => {
                 interests={match.interests}
                 location={match.location}
                 website={match.website}
+                email={match.email}
+                instagram={match.instagram}
+                discord={match.discord}
               />
             </Box>
           ))}

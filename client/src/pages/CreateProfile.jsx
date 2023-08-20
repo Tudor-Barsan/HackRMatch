@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Route, Navigate, useNavigate } from "react-router-dom";
 import {
   Button,
   Center,
@@ -10,7 +10,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Link,
   Menu,
   MenuButton,
   MenuItem,
@@ -23,11 +22,14 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
+import { useAuthContext } from "../hooks/useAuthContext";
 
 
 const isWebView = false;
 
 const CreateProfile = () => {
+  const { user } = useAuthContext();
+
   const [name, setName] = useState("");
   const [pronouns, setPronouns] = useState("");
   const [university, setUniversity] = useState("");
@@ -310,12 +312,9 @@ const CreateProfile = () => {
 
     const getSubmitSection = () => {
       return (
-        <Button
-          bg="#7D5BA6"
-          color="#000000"
-        >
-          Create Profile
-        </Button>
+      <>
+        {user && <Link to="/hacker-view">View Dashboard</Link>}
+      </>
       )
 
     };

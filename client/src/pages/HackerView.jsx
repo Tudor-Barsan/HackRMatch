@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import axios from 'axios'
+import { useAuthContext } from '../hooks/useAuthContext.js'
+import { Navigate } from "react-router";
+
+import UserCard from "../components/UserCard.jsx";
+
 
 const ListPage = () => {
   const [matches, setMatches] = useState(null)
+  const { user } = useAuthContext()
 
   useEffect(() => {
     const fetchMatches = async () => {
@@ -23,25 +29,28 @@ const ListPage = () => {
   }, [])
 
   return (
-    <> {(matches) ? 
-    <Flex direction="column" padding="5">
-        <Heading marginBottom="5">List of Matches</Heading>
-        {matches.map((match) => (
-          <Box
-            key={match._id}
-            borderRadius="md"
-            borderWidth="1px"
-            padding="5"
-            marginBottom="4"
-            boxShadow="lg"
-          >
-            <Heading size="md">{match.fullName}</Heading>
-            <Text>{match.bio}</Text>
-          </Box>
-        ))}
-      </Flex>
-      : <div>No matches found</div>
-    } </>
+    <> 
+    <UserCard />
+      {(user) ? 
+      (matches) ? 
+      <Flex direction="column" padding="5">
+          <Heading marginBottom="5">List of Matches</Heading>
+          {matches.map((match) => (
+            <Box
+              key={match._id}
+              borderRadius="md"
+              borderWidth="1px"
+              padding="5"
+              marginBottom="4"
+              boxShadow="lg"
+            >
+              <Heading size="md">{match.fullName}</Heading>
+              <Text>{match.bio}</Text>
+            </Box>
+          ))}
+        </Flex>
+        : <div>No matches found</div>
+    : <Navigate to='/'></Navigate>} </>
   );
 };
 

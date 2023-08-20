@@ -48,7 +48,7 @@ const Login = () => {
                 </header>
                 <div className="loginLinkExt"><button onClick={redirectToGoogleSSO}>Google+</button></div>
                 {(user) ? 
-                <Link to='/hacker-view'>Matches</Link>
+                <Link to='/create-profile'>Create Profile</Link>
                 : <></>}
             </div>
         </div>

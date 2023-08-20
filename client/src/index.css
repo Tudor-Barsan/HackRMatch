@@ -148,10 +148,11 @@ span {
   flex-wrap: wrap;
 }
 
-#googleBtn {
+.homeBtn {
   font-size: 1.5em;
   width: fit-content;
   background-color: #653780;
+  margin-bottom: 0.8em;
 }
 
 nav {

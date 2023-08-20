@@ -5,6 +5,7 @@ import { useAuthContext } from '../hooks/useAuthContext.js'
 import { Navigate } from "react-router";
 
 import UserCard from "../components/UserCard.jsx";
+import Navbar from "../components/Navbar.jsx";
 
 
 const ListPage = () => {
@@ -30,6 +31,7 @@ const ListPage = () => {
 
   return (
     <> 
+    <Navbar />
     <UserCard />
       {(user) ? 
       (matches) ? 

@@ -25,7 +25,7 @@ const userSchema = new Schema({
   mySkills: [String],
   wantedSkills: [String],
   interests: [String],
-  location: [String],
+  location: String,
   score: Number,
 
   // socials

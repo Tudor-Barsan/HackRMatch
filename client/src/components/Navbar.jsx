@@ -22,10 +22,10 @@ const Navbar = () => {
     return (
         <div>
             <nav>
-                <Link id="homeBtn" to="/">Home</Link>
+                <Link id="homeBtn" to="/" className="nav-button">Home</Link>
                 <ul id="navOptions">
-                    <li><Link to="/hacker-view">Matches</Link></li>
-                    <li><button id="logoutBtn" onClick={logOutUser}>Logout</button></li>
+                    <li><Link to="/hacker-view" className="nav-button">Matches</Link></li>
+                    <li><button id="logoutBtn" className="nav-button" onClick={logOutUser}>Logout</button></li>
                 </ul>
             </nav>
         </div>

@@ -23,6 +23,8 @@ const ListPage = () => {
 
       if (response && response.data) {
         setMatches(response.data)
+        console.log(response.data)
+        console.log(response.data[0].possibleMatches)
       }
     }
 
@@ -32,22 +34,38 @@ const ListPage = () => {
   return (
     <> 
     <Navbar />
-    <UserCard />
       {(user) ? 
       (matches) ? 
-      <Flex direction="column" padding="5">
-          <Heading marginBottom="5">List of Matches</Heading>
+      <Flex direction="column" padding="5" background="linear-gradient(270deg, #0e0013 0%, #3a122e 74%)">
+          <Heading
+            fontSize="35px"
+            color="#e4e4e4"
+            marginBottom="10" 
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            Your Matches
+          </Heading>
           {matches.map((match) => (
             <Box
               key={match._id}
               borderRadius="md"
               borderWidth="1px"
-              padding="5"
+              padding="10"
               marginBottom="4"
               boxShadow="lg"
             >
-              <Heading size="md">{match.fullName}</Heading>
-              <Text>{match.bio}</Text>
+              <UserCard 
+                fullName={match.fullName} 
+                pronouns={match.pronouns}
+                mySkills={match.mySkills}
+                image={match.image}
+                wantedSkills={match.wantedSkills}
+                interests={match.interests}
+                location={match.location}
+                website={match.website}
+              />
             </Box>
           ))}
         </Flex>

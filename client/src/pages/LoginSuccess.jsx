@@ -10,7 +10,7 @@ export function LoginSuccess() {
   }, []);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: "white" }}>
       <CheckIcon boxSize={50}></CheckIcon>
       <Text fontSize='sm'>Login successful!</Text>
     </div>

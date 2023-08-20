@@ -9,16 +9,45 @@ const Landing = () => {
 
   useEffect(() => {}, [])
 
+  const fetchAuthUser = async () => {
+    const response = await axios
+    .get("http://localhost:8080/auth/user", { withCredentials: true })
+    .catch((err) => {
+        console.log(err);
+    });
+
+    if (response && response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data))
+        await dispatch({type: 'LOGIN', payload: response.data})
+    }
+  }
+
+  const redirectToGoogleSSO = async () =>{
+      let timer = null;
+      const loginURL = "http://localhost:8080/auth/google";
+      const newWindow = window.open(
+          loginURL,
+        "_blank",
+        "width=500,height=600",
+      );
+
+      if (newWindow) {
+          timer = setInterval(() => {
+              if (newWindow.closed) {
+                fetchAuthUser();
+                if (timer) clearInterval(timer);
+              }
+          }, 500);
+      };
+  }
+
   const logOutUser = async () => {
     const response = await axios
       .get("http://localhost:8080/auth/logout", { withCredentials: true })
       .catch((err) => {
           console.log(err);
       });
-      console.log(response)
     if (response) {
-        console.log('should return response')
-        console.log(response)
         localStorage.removeItem('user')
         dispatch({type: 'LOGOUT'})
     }
@@ -31,7 +60,8 @@ const Landing = () => {
           src="../HackRMatchLogo.png"
           alt="HackRMatch Logo"
         ></img>
-          <Link to="/auth/login">Login</Link>
+          {(!user) && <div className="loginLinkExt"><button onClick={redirectToGoogleSSO}>Google</button></div>}
+          {(user) ? <Link to='/hacker-view'>Matches</Link> : <></>}
           {user && <button onClick={logOutUser}>Logout</button>}
       </div>
     )

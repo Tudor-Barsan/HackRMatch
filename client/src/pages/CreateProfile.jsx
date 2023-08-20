@@ -33,6 +33,8 @@ const CreateProfile = () => {
   const [name, setName] = useState("");
   const [pronouns, setPronouns] = useState("");
   const [university, setUniversity] = useState("");
+  const [location, setLocation] = useState("");
+  const [biography, setBiography] = useState("");
   const [skill, skillHave] = useState("");
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
@@ -283,9 +285,9 @@ const CreateProfile = () => {
               Location
             </FormLabel>
             <Input
-              type="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              type="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
               placeholder={""}
             />
           </FormControl>
@@ -303,7 +305,8 @@ const CreateProfile = () => {
             Biography
           </FormLabel>
           <Textarea
-            onChange={(e) => setOrganizationDesc(e.target.value)}
+            value={biography}
+            onChange={(e) => setBiography(e.target.value)}
           />
         </FormControl>
       )

@@ -1,5 +1,6 @@
 import React from 'react'
 import { 
+  Flex,
   Card, 
   CardBody, 
   Image,
@@ -13,53 +14,58 @@ import {
 } from '@chakra-ui/react'
 
 
-const UserCard = () => {
+const UserCard = (props) => {
   return (
     <div style={{
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      padding: "4rem",
-      
+      backgroundImage: "linear-gradient(270deg, #0e0013 0%, #3a122e 74%)"
     }}>
       <Card 
         maxW='sm' 
         direction="row"
-        width="60%"
+        width="50%"
         height="20%"
-        backgroundColor="red"
+        textColor="#05231B"
+        background="#D1C8E1"
+        boxShadow='0px 4px 8px rgba(0, 0, 0, 0.1)'
         borderRadius="25px"
       >
-        <CardBody>
-          <Text>
-            NAME
-          </Text>
-          <Image
-            width={"200px"}
-            height={"200px"}
-            src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            alt='Green double couch with wooden legs'
-            padding='10px'
-            borderRadius='30px'
-          />
-          <Stack mt='6' spacing='3'>
-            <Heading size='md'>Living room Sofa</Heading>
-            <Text color='blue.600' fontSize='2xl'>
-              $450
+        <CardBody paddingLeft="30px" paddingBottom="10px">
+          <Flex direction='column' justifyContent="center" alignItems="center">
+            <Text fontSize="20px" lineHeight="15px" margin="30px 0px 0px 0px">
+              {props.fullName}
             </Text>
-          </Stack>
+            <Text fontSize="15px" lineHeight="10px">
+              {props.pronouns}
+            </Text>
+            <Image
+              width={"200px"}
+              height={"200px"}
+              src={props.image}
+              alt='Profile Picture'
+              borderRadius='30px'
+            />
+          </Flex>
         </CardBody>
-        <Divider />
-        <CardFooter>
-          <ButtonGroup spacing='2'>
-            <Button variant='solid' colorScheme='blue'>
-              Buy now
-            </Button>
-            <Button variant='ghost' colorScheme='blue'>
-              Add to cart
-            </Button>
-          </ButtonGroup>
-        </CardFooter>
+        <Flex direction='column' justifyContent="center">
+          <Text fontSize="15px" lineHeight="15px" margin="30px 0px 0px 30px">
+            {`Skills: ${props.mySkills}`}
+          </Text>
+          <Text fontSize="15px" lineHeight="15px" margin="30px 0px 0px 30px">
+            {`Skills: ${props.wantedSkills}`}
+          </Text>
+          <Text fontSize="15px" lineHeight="15px" margin="30px 0px 0px 30px">
+            {`Interests: ${props.interests}`}
+          </Text>
+          <Text fontSize="15px" lineHeight="15px" margin="30px 0px 0px 30px">
+            {`Location: ${props.location}`}
+          </Text>
+          <Text fontSize="15px" lineHeight="15px" margin="30px 0px 20px 30px">
+            {`Website: ${props.website}`}
+          </Text>
+        </Flex>
       </Card>
     </div>
   )

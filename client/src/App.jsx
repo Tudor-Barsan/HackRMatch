@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Link, Routes, Route} from "react-router-dom";
 
-import { CreateProfile, Landing } from "./pages";
+import { CreateProfile, Landing } from "./pages/Index";
 import Login from "./pages/Login";
 import { LoginSuccess } from "./pages/LoginSuccess";
 import HackerView from "./pages/HackerView";

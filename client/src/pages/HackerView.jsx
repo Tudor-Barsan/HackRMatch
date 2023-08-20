@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import axios from 'axios'
 
+import UserCard from "../components/UserCard.jsx";
+
+
 const ListPage = () => {
   const [matches, setMatches] = useState(null)
 
@@ -23,7 +26,9 @@ const ListPage = () => {
   }, [])
 
   return (
-    <> {(matches) ? 
+    <> 
+    <UserCard />
+      {(matches) ? 
     <Flex direction="column" padding="5">
         <Heading marginBottom="5">List of Matches</Heading>
         {matches.map((match) => (

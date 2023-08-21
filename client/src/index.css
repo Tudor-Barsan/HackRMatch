@@ -230,4 +230,7 @@ nav {
     width: 35%;
     height: 20%;
   }
+  img {
+    width: 80%;
+  }
 }

@@ -65,15 +65,15 @@ const UserCard = (props) => {
             </Flex>
             <Flex direction="column">
               <Text fontSize="15px" lineHeight="15px" margin="30px 0px 0px 30px">
-                <FaEnvelope style={{ marginRight: '8px' }} />
+                <FaEnvelope style={{ marginRight: '8px', verticalAlign: 'bottom' }} />
                 {`Email: ${props.email}`}
               </Text>
               <Text fontSize="15px" lineHeight="15px" margin="15px 0px 0px 30px">
-                <FaInstagram style={{ marginRight: '8px' }} />
+                <FaInstagram style={{ marginRight: '8px', verticalAlign: 'bottom' }} />
                 {`Instagram: @${props.instagram}`}
               </Text>
               <Text fontSize="15px" lineHeight="15px" margin="15px 0px 20px 30px">
-                <FaDiscord style={{ marginRight: '8px' }} />
+                <FaDiscord style={{ marginRight: '8px', verticalAlign: 'bottom' }} />
                 {`Discord: ${props.discord}`}
               </Text>
             </Flex>

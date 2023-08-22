@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import fs from 'fs/promises';
 
+// This file is necessary when using both .js and .jsx files in a vite environment.
 export default defineConfig(() => ({
   server: {
     proxy: {

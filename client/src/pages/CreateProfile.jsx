@@ -114,8 +114,8 @@ const CreateProfile = () => {
           <FormLabel>My Skills</FormLabel>
           <CheckboxGroup>
             <Stack gap="25px" spacing={[3, 5]} direction={"row"}>
-              {availableSkills.map((skill) => (
-                <Checkbox value={skill}>{skill}</Checkbox>
+              {availableSkills.map((skill, index) => (
+                <Checkbox key={index} value={skill}>{skill}</Checkbox>
               ))}
             </Stack>
           </CheckboxGroup>
@@ -125,8 +125,8 @@ const CreateProfile = () => {
           <FormLabel>Wanted Skills</FormLabel>
           <CheckboxGroup>
             <Stack gap="25px" spacing={[3, 5]} direction={"row"}>
-              {availableSkills.map((skill) => (
-                <Checkbox value={skill}>{skill}</Checkbox>
+              {availableSkills.map((skill, index) => (
+                <Checkbox key={index} value={skill}>{skill}</Checkbox>
               ))}
             </Stack>
           </CheckboxGroup>
@@ -136,8 +136,8 @@ const CreateProfile = () => {
           <FormLabel>Interests</FormLabel>
           <CheckboxGroup>
             <Stack gap="25px" spacing={[3, 5]} direction={"row"}>
-              {availableInterests.map((skill) => (
-                <Checkbox value={skill}>{skill}</Checkbox>
+              {availableInterests.map((skill, index) => (
+                <Checkbox key={index} value={skill}>{skill}</Checkbox>
               ))}
             </Stack>
           </CheckboxGroup>

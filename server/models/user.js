@@ -1,8 +1,6 @@
 // models / userModel.js
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema
-import bcrypt from 'bcrypt'
-import ExpressError from '../utils/expressError.js';
 
 const ImageSchema = new Schema({
   url: String,

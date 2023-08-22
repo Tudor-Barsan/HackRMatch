@@ -2,8 +2,6 @@ import mongoose from "mongoose";
 import User from "./models/user.js";
 import * as dotenv from "dotenv";
 import faker from "faker";
-import { createAvatar } from '@dicebear/core';
-import { bottts } from '@dicebear/collection';
 dotenv.config();
 
 mongoose.connect(process.env.MONGODB_URL, {
